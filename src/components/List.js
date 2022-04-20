@@ -48,8 +48,9 @@ function List({ resource }) {
     <ul
       style={{
         textAlign: "start",
-        width: "700px",
+        maxWidth: "500px",
         margin: "0 auto",
+        padding: "1rem"
       }}
     >
       {

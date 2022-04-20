@@ -4,16 +4,16 @@ function Button({ name, onClick }) {
     return (
         <button
             style={{
-                width: "10rem",
+                width: "7rem",
                 backgroundColor: "tomato",
-                margin: "2rem",
                 border: "none",
                 padding: "1rem",
+                fontSize: "1.2rem"
             }}
             onClick={onClick}
         >
             {name}
-        </button>
+        </button >
     );
 }
 

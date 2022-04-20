@@ -8,11 +8,13 @@ function App() {
   const [resource, setResource] = useState("");
 
   return (
-    <div style={{ textAlign: 'center', marginTop: "2rem" }}>
-      <Button name='Posts' onClick={() => { setResource("posts") }} />
-      <Button name="Users" onClick={() => { setResource("users") }} />
-      <Button name="Comments" onClick={() => { setResource("comments") }} />
-      <h1 style={{ borderBottom: "1px solid black", paddingBottom: "10px", textTransform: "uppercase" }}>{resource ? resource : "Welcome"}</h1>
+    <div style={{ textAlign: 'center', margin: "2rem auto" }}>
+      <div style={{ width: "100vw", backgroundColor: "tomato", display: "flex", flexWrap: "wrap", wrapDirection: "column", alignItems: "center", justifyContent: 'space-around' }}>
+        <Button name='Posts' onClick={() => { setResource("posts") }} />
+        <Button name="Users" onClick={() => { setResource("users") }} />
+        <Button name="Comments" onClick={() => { setResource("comments") }} />
+      </div>
+      <h1 style={{ color: "black", borderBottom: "1px solid black", paddingBottom: "10px", textTransform: "uppercase" }}>{resource ? resource : "Welcome"}</h1>
       <Scroll>
         <List resource={resource} />
       </Scroll>
