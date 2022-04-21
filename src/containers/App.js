@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Button from "../components/Button";
-import List from "../components/List";
-import Scroll from "../components/Scroll";
+import Button from "../components/button/Button";
+import List from "../components/list/List";
+import Scroll from "../components/scroll/Scroll";
 
 
 function App() {

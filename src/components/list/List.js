@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 function List({ resource }) {
 
-  const [data, setData] = useState("");
+  const [items, setItems] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -13,22 +13,17 @@ function List({ resource }) {
       let response = await fetch(
         `https://jsonplaceholder.typicode.com/${resource}?_limit=5`
       );
-      console.log(response);
-
       if (!response.ok) {
         throw new Error(
           `This is an HTTP Error: the status is ${response.status}`
         );
       }
       let result = await response.json();
-      setData(result);
-
-
+      setItems(result);
       setError(null);
-      console.log(result);
     } catch (e) {
       setError(e.message);
-      setData(null);
+      setItems(null);
       console.log(error);
     } finally {
       setLoading(false);
@@ -40,9 +35,11 @@ function List({ resource }) {
   }, [resource]);
 
 
-
-  if (!data) {
+  if (!items) {
     return null;
+  }
+  if (loading) {
+    return <h1>Loading...</h1>
   }
   return (
     <ul
@@ -54,68 +51,64 @@ function List({ resource }) {
       }}
     >
       {
-        data.map((item) => {
+        items.map((item) => {
           if (resource === "users") {
             return (
-              <li style={{ border: "1px solid black", listStyleType: "none", padding: "1rem", margin: "2rem" }}>
-                <li style={{ listStyleType: "none", padding: "1rem" }}>
-                  {" "}
+              <li key={item.id} style={{ border: "1px solid black", listStyleType: "none", padding: "1rem", margin: "2rem" }}>
+                <p>
                   <span style={{ fontWeight: "bold", paddingRight: "2rem" }}>
                     Username:<br />
                   </span>
                   {item.name}
-                </li>
-                <li style={{ listStyleType: "none", padding: "1rem", paddingTop: 0 }}>
-                  {" "}
+                </p>
+                <p>
                   <span style={{ fontWeight: "bold", paddingRight: "2rem" }}>
                     Email: <br />
                   </span>
                   {item.email}
-                </li>
-                <li style={{ listStyleType: "none", padding: "1rem", paddingTop: 0 }}>
+                </p>
+                <p >
                   {" "}
                   <span style={{ fontWeight: "bold", paddingRight: "2rem" }}>
                     Website: <br />
                   </span>
                   {item.website}
-                </li>
+                </p>
               </li>
             );
           }
           if (resource === "posts") {
             return (
-              <li style={{ listStyleType: "none", padding: "1rem" }}>
-                <li style={{ listStyleType: "none", padding: "1rem" }}>
+              <li key={item.id} style={{ listStyleType: "none", padding: "1rem" }}>
+                <p>
                   {" "}
                   <span style={{ fontWeight: "bold", paddingRight: "2rem" }}>
                     {item.title}<br />
                   </span>
-                </li>
-                <li style={{ listStyleType: "none", padding: "1rem", paddingTop: 0 }}>
-                  {" "}
-
+                </p>
+                <p >
                   {item.body}
-                </li>
+                </p>
               </li>
             );
           }
 
           return (
-            <li style={{ listStyleType: "none", padding: "1rem" }}>
-              <li style={{ listStyleType: "none", padding: "1rem" }}>
+            <li key={item.id} style={{ listStyleType: "none", padding: "1rem" }}>
+              <p >
                 {" "}
                 <span style={{ fontWeight: "bold", paddingRight: "2rem" }}>
                   From:<br />
                 </span>
                 {item.email}
-              </li>
-              <li style={{ listStyleType: "none", padding: "1rem", paddingTop: 0 }}>
+              </p>
+              <p >
                 {" "}
                 <span style={{ fontWeight: "bold", paddingRight: "2rem" }}>
                   Comment: <br />
                 </span>
                 {item.body}
-              </li>
+              </p>
             </li>
           );
         }
